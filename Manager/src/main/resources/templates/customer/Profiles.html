@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	th:replace="layout/Base::layout(
+    	~{::head/content()},
+    	~{::#content/content()}, 
+    )">
+<head>
+	<title>Profiles</title>
+</head>
+<body>
+	<div id="content" >
+	<th:block th:object ="${customer}">
+		<h1>Profiles</h1>
+		<p>User name:[[*{user.username}]]</p>
+		<p>Password:********************<a th:href="${CONVERT.url('CC#edit')}">Change</a></p>
+		<p>Email:[[*{user.email}]]<a th:href="${CONVERT.url('CC#edit')}">Edit</a></p>
+		<h2>Customer info<a th:href="${CONVERT.url('CC#edit')}">(Edit)</a></h2>
+		<p>first name:[[*{firstName}]]</p>
+		<p>middle name:[[*{middleName}]]</p>
+		<p>last name:[[*{lastName}]]</p>
+		<p>birthday:[[*{birthday}]]</p>
+	</th:block>
+	</div>
+</body>
+</html>

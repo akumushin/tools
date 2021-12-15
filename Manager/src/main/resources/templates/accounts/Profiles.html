@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	th:replace="layout/Base::layout(
+    	~{::head/content()},
+    	~{::#content/content()}, 
+    )">
+<head>
+	<title>Profiles</title>
+</head>
+<body>
+	<div id="content" th:object ="${customer}">
+		<p>User name:[[*{user.username}]]</p>
+		<p>first name:[[*{firstName}]]</p>
+		<p>middle name:[[*{middleName}]]</p>
+		<p>last name:[[*{lastName}]]</p>
+		<p>birthday:[[*{birthday}]]</p>
+	</div>
+</body>
+</html>
