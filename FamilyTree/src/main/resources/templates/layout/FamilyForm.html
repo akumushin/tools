@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html  lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<th:block th:fragment="form(form, isSearch)">
+	<div class="form-group mb-2">
+		<label>ID:</label>
+		<input type="text" class="form-control form-control-sm" placeholder="AUTO" name="id" th:disabled="${!isSearch}" th:value="${form.id}">
+	</div>
+	<div class="form-group mb-2">
+		<label for="name">Tên hộ:</label>
+		<input type="text" class="form-control form-control-sm" placeholder="Enter name" id="name"
+			name="name"  th:value="${form.name}">
+	</div>
+	<div class="form-group mb-2">
+		<label for="name">Địa chỉ:</label>
+		<input type="text" class="form-control form-control-sm" placeholder="Enter place" id="place"
+			name="place"  th:value="${form.place}">
+	</div>
+	<div class="form-group mb-2" th:if="${isSearch}">
+		<label>Người trong gia đình:</label>
+		<div class="input-group input-group-sm">
+			<input type="hidden" name="memberId" id="memberId" th:value="${form.memberId}">
+			<span class="form-control" id="memberDisplay">[[${form.memberId}]]</span>
+			<div class="input-group-append">
+				<button class="btn btn-warning search" data-display="#memberDisplay" data-output="#memberId"
+					th:data-link="${#mvc.url('Persons#search').build()}">Tìm kiếm</button>
+			</div>
+			<div class="input-group-append">
+				<button class="btn btn-secondary delete" data-display="#memberDisplay"
+					data-output="#memberId">Xóa</button>
+			</div>
+		</div>
+
+	</div>
+</th:block>	
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<th:block th:fragment="leftMenu">
+<div class="list-group" >
+	 <h5  class="list-group-item display" style="padding-left:10px;">Thành viên</h5>
+	<a th:href="${CONVERT.url('Persons#add')}" class="list-group-item list-group-item-action" style="padding-left:30px;">Thêm</a>
+	<a th:href="${CONVERT.url('Persons#list')}" class="list-group-item list-group-item-action" style="padding-left:30px;">Danh sách</a>
+	
+	<h5  class="list-group-item display" style="padding-left:10px;">Hôn nhân</h5>
+	<a th:href="${CONVERT.url('Marries#add')}" class="list-group-item list-group-item-action" style="padding-left:30px;">Thêm</a>
+	<a th:href="${CONVERT.url('Marries#list')}" class="list-group-item list-group-item-action" style="padding-left:30px;">Danh sách</a>
+	
+	<h5  class="list-group-item display" style="padding-left:10px;">Gia đình</h5>
+	<a th:href="${CONVERT.url('Families#add')}" class="list-group-item list-group-item-action" style="padding-left:30px;">Thêm</a>
+	<a th:href="${CONVERT.url('Families#list')}" class="list-group-item list-group-item-action" style="padding-left:30px;">Danh sách</a>
+	
+	<h5  class="list-group-item display" style="padding-left:10px;">Hỗ trợ & cài đặt</h5>
+	<a href="#" class="list-group-item list-group-item-action" style="padding-left:30px;">Đăng nhập</a>
+	<a href="#" class="list-group-item list-group-item-action" style="padding-left:30px;">Đăng xuất</a>
+</div>
+</th:block>
+</body>
+</html>

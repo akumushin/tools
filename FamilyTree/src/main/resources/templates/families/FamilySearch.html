@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="CONVERT=${new com.familytree.common.utils.Convert()}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<title>Tìm kiếm</title>
+<script th:src="@{/js/persons/search.js}"></script>
+<script th:src="@{/js/persons/person-add.js}"></script>
+</head>
+<body>
+<div class="container">
+	<button data-toggle="collapse" data-target="#filter">Bộ lọc</button>
+	<div id="filter" th:class="'collapse'+${result !=null?'':' show'}" >
+		<form method="get" id="searchForm" th:action="${CONVERT.url('Families#search',key)}">
+			<th:block th:insert="layout/FamilyForm::form(${form}, true)"></th:block>
+			<button type="submit" class="btn btn-primary" name="search" id="searchSubmit">Tìm kiếm</button>
+		</form>
+	</div>
+	<div >
+		<table class="table">
+			<thead>
+				<tr>
+					<td>Chọn</td>
+					<td>ID</td>
+					<td>Tên hộ</td>
+					<td>Địa chỉ</td>
+				</tr>
+			</thead>
+			<tbody id="result" th:data-key="${key}">
+				<tr th:each="p:${result}">
+					<td><button th:data-output="${p.id}" th:data-display="${p.name}" class ="select">Chọn</button></td>
+					<td>[[${p.id}]]</td>
+					<td>[[${p.name}]]</td>
+					<td>[[${p.place}]]</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</body>
+</html>

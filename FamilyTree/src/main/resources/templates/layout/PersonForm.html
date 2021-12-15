@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html  lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<th:block th:fragment="form(form, isSearch)">
+	<div class="row">
+		<div class="col-sm-6">
+			<!-- left col -->
+			<div class="form-group mb-2">
+				<label>ID:</label>
+				<input type="text" class="form-control form-control-sm" placeholder="AUTO" name="id" th:disabled="${!isSearch}" th:value="${form.id}">
+			</div>
+			<div class="form-group mb-2">
+				<label for="name">Họ và Tên*:</label>
+				<input type="text" class="form-control form-control-sm" placeholder="Enter name" id="name"
+					name="name"  th:value="${form.name}">
+			</div>
+			<div class="form-group mb-2">
+				<label>Giới tính*:</label>
+				<select class="form-control form-control-sm" name="sex">
+					<option value="" th:selected="${form.sex?.toString()==''}" th:if="${isSearch}">Tất cả</option>
+					<option value="MALE" th:selected="${form.sex?.toString()}=='MALE'">Nam</option>
+					<option value="FEMALE" th:selected="${form.sex?.toString()}=='FEMALE'">Nữ</option>
+					<option value="UNKNOWN" th:selected="${form.sex?.toString()=='UNKNOWN'}">Không xác định</option>
+				</select>
+			</div>
+			<div class="form-group mb-2">
+				<label>Ngày sinh*:</label>
+				<input type="number" class="form-control form-control-sm" placeholder="yyyymmdd" name="birthday" th:value="${form.birthday}">
+			</div>
+		</div><!-- end left col -->
+		<div class="col-sm-6">
+			<!-- right col -->
+			<div class="form-group mb-2">
+				<label>Tình trạng*:</label>
+				<select class="form-control form-control-sm" name="alive">
+					<option value="" th:selected="${form.alive?.toString()}==''" th:if="${isSearch}">Tất cả</option>
+					<option value="true" th:selected="${form.alive?.toString()}=='true'">Còn sống</option>
+					<option value="false" th:selected="${form.alive?.toString()}=='false'">Đã mất</option>
+				</select>
+			</div>
+			
+			<div class="form-group mb-2">
+				<label>Ngày mất:</label>
+				<input type="number" class="form-control form-control-sm" placeholder="yyyymmdd" name="deadday" th:value="${form.deadday}">
+			</div>
+			<div class="form-group mb-2">
+		<label>Bố đẻ:</label>
+		<div class="input-group input-group-sm">
+			<input type="hidden" name="fatherId" id="fatherId" th:value="${form.fatherId}">
+			<span class="form-control" id="fatherDisplay">[[${form.fatherId}]]</span>
+			<div class="input-group-append">
+				<a class="btn btn-warning search" data-display="#fatherDisplay" data-output="#fatherId"
+					th:data-link="${CONVERT.url('Persons#search')}">Tìm kiếm</a>
+			</div>
+			<div class="input-group-append">
+				<a class="btn btn-secondary delete" data-display="#fatherDisplay"
+					data-output="#fatherId">Xóa</a>
+			</div>
+		</div>
+
+	</div>
+	<div class="form-group mb-2">
+		<label>Mẹ đẻ:</label>
+		<div class="input-group input-group-sm">
+			<input type="hidden" name="motherId" id="motherId" th:value="${form.motherId}">
+			<span class="form-control" id="motherDisplay">[[${form.motherId}]]</span>
+			<div class="input-group-append">
+				<a class="btn btn-warning search" data-display="#motherDisplay" data-output="#motherId"
+					th:data-link="${CONVERT.url('Persons#search')}">Tìm kiếm</a>
+			</div>
+			<div class="input-group-append">
+				<a class="btn btn-secondary delete" data-display="#motherDisplay"
+					data-output="#motherId">Xóa</a>
+			</div>
+		</div>
+	</div>
+	<div class="form-group mb-2">
+		<label>Gia đình:</label>
+		<div class="input-group input-group-sm">
+			<input type="hidden" name="familyId" id="familyId" th:value="${form.familyId}">
+			<span class="form-control" id="familyDisplay">[[${form.familyId}]]</span>
+			<div class="input-group-append">
+				<a class="btn btn-warning search" data-display="#familyDisplay" data-output="#familyId"
+					th:data-link="${CONVERT.url('Families#search')}">Tìm kiếm</a>
+			</div>
+			<div class="input-group-append">
+				<a class="btn btn-secondary delete" data-display="#familyDisplay"
+					data-output="#familyId">Xóa</a>
+			</div>
+		</div>
+	</div>
+		</div><!-- end right col -->
+
+	</div>
+	
+	
+</th:block>	
+</body>
+</html>

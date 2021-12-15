@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	th:replace="layout/Base::layout(
+    	~{::head/content()},
+    	~{::#pageName/content()}, 
+    	~{::#center/content()}, 
+    )">
+<head>
+	<title>Thông tin chi tiết</title>
+	<script th:src="@{/js/persons/person-add.js}"></script>
+</head>
+
+<body>
+	<span id="pageName">Thông tin chi tiết</span>
+	<div id="center">
+		<div class="container">
+			<!-- center layout-->
+			<div class="card" style="width:400px">
+				<img class="card-img-top" src="img_avatar1.png" alt="Card image" style="width:100%">
+				<div class="card-body">
+					<h4 class="card-title">[[${obj.name}]]</h4>
+					<a th:href="${CONVERT.url('Persons#edit',obj.id)}">Thay đổi</a>
+					<a th:href="${CONVERT.url('Persons#delete',obj.id)}">Xóa</a>
+					[[${CONVERT.url('Persons#detail',obj.id)}]]
+					<p class="card-text">Giới tính: [[${CONVERT.sex(obj.sex,"Nam","Nữ","Không rõ")}]]</p>
+					<p class ="card-text">Ngày sinh: [[${CONVERT.date(obj.birthday,"DD/MM/YYYY")}]]</p>
+					<p class="card-text">Tình trạng: [[${obj.alive?"Còn sống":"Đã mất"}]]</p>
+					<p class ="card-text" th:if="${!obj.alive}">Ngày mất: [[${CONVERT.date(obj.deadday,"DD/MM/YYYY")}]]</p>
+					<p class ="card-text" th:if="${obj.familyId}">Hộ khẩu: <a th:href="${CONVERT.url('Families#detail',obj.family.id)}">[[${obj.family?.place}]]</a></p>
+					<p class ="card-text" th:if="${obj.father}">Bố ruột: 
+						<a th:href="${CONVERT.url('Persons#detail',obj.father.id)}">[[${obj.father.name}]]</a>
+					</p>
+					<p class ="card-text" th:if="${obj.mother}">Mẹ ruột: 
+						
+						<a th:href="${CONVERT.url('Persons#detail',obj.mother.id)}">[[${obj.mother.name}]]</a>
+					</p>
+					<div th:if="${obj.childrens.size()>0}">
+						<p class="card-text" >Con cái:</p>
+						<th:block th:each="child:${obj.childrens}">
+							-<a th:href="${CONVERT.url('Persons#detail',child.id)}">[[${child.name}]]</a><br>
+						</th:block>
+					</div>
+					<div>
+						<p class="card-text" >Tình trạng hôn nhân:<a href="#">Thêm</a></p>
+						<th:block th:each="marry:${obj.marries}">
+							<a th:href="${CONVERT.url('Marries#detail',marry.husbandId, marry.husbandFlag)}">Kết hôn</a> với
+							<th:block th:if="${marry.husband.id==obj.id}">
+								<a th:href="${CONVERT.url('Persons#detail',marry.wife.id)}">[[${marry.wife.name}]]</a>
+							</th:block>
+							<th:block th:if="${marry.wife.id==obj.id}">
+								<a th:href="${CONVERT.url('Persons#detail',marry.husband.id)}">[[${marry.husband.name}]]</a>
+							</th:block>
+							ngày [[${CONVERT.date(marry.marryDate,"DD/MM/YYYY")}]]
+							
+							<th:block th:if="${marry.divorced}">
+								, ly hôn ngày [[${CONVERT.date(marry.divorceDate,"DD/MM/YYYY")}]]
+							</th:block>
+							<br>
+						</th:block>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

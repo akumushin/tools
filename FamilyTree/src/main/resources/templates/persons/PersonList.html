@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	th:replace="layout/Base::layout(
+    	~{::head/content()},
+    	~{::#pageName/content()}, 
+    	~{::#center/content()}, 
+    )">
+<head>
+	<title>Danh sách</title>
+	<script th:src="@{/js/persons/person-add.js}"></script>
+</head>
+
+<body>
+	<span id="pageName">Danh sách</span>
+	<div id="center">
+		<!-- center layout-->
+		<div class="container">
+		<br>
+			<a class="btn btn-info" data-toggle="collapse" data-target="#filter">Bộ Lọc</a>
+			<div id="filter" th:class="'collapse'+${result!=null?'':' show'}">
+				<form method="get">
+					<th:block th:insert="layout/PersonForm::form(${form}, true)"></th:block>
+					<div class="col-12 text-center">
+				<a class="btn btn-danger" data-toggle="collapse" data-target="#filter" style="width:100px;">Hủy</a>
+				<button type="submit" class="btn btn-success" style="width:100px;" name="search">Tìm kiếm</button>
+			</div>
+				</form>
+			</div>
+			
+			<br>
+	<table class="table" th:if="${result}">
+	<thead>
+		<tr>
+			<td>*</td>
+			<td>ID</td>
+			<td>Họ Tên</td>
+			<td>Giới tính</td>
+			<td>Ngày sinh</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="p:${result}">
+			<td><a class ="btn btn-warning" th:href="${#mvc.url('Persons#detail').arg(0,p.id).build()}">Chi tiết</a></td>
+			<td>[[${p.id}]]</td>
+			<td>[[${p.name}]]</td>
+			<td>[[${CONVERT.sex(p.sex,"Nam","Nữ","Không rõ")}]]</td>
+			<td>[[${CONVERT.date(p.birthday,"DD/MM/YYYY")}]]</td>
+		</tr>
+	</tbody>
+</table>
+		</div>
+	</div>
+
+
+</body>
+
+</html>

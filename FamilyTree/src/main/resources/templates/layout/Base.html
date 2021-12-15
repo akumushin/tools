@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	th:fragment="layout(head, header, center)" 
+	th:with="CONVERT=${new com.familytree.common.utils.Convert()}">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+	<link th:href="@{/css/modal.css}" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	<th:block th:insert="${head}">
+
+	</th:block>
+</head>
+
+<body>
+	<div>
+		<header>
+
+			<nav class="navbar navbar-expand-sm navbar-dark d-none d-md-flex" style="background-color:#0F1111; ">
+				<ul class="navbar-nav">
+					<li class="nav-item active"><a class="nav-link" th:href="${CONVERT.url('Home#home')}"> <i class="fas fa-home"></i></a></li>
+				</ul>
+				<ul class="navbar-nav mr-auto">
+						<li class="nav-item dropdown" style="min-width: 80px;">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Quản lý</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="">Tạo gia phả</a>
+								<a class="dropdown-item" href="#">Danh sách</a>
+								<a class="dropdown-item" href="#">Xin cấp phép</a>
+							</div>
+						</li>
+				</ul>
+				<span class="navbar-brand" th:insert="${header}"> Header </span>
+				<ul class="navbar-nav ml-auto">
+						<li class="nav-item dropdown" style="min-width: 80px;">
+							<!--NULL-->
+						</li>
+						<li class="nav-item dropdown" style="min-width: 80px;">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Tài khoản</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="#">Thông tin tài khoản</a> 
+								<a class="dropdown-item" href="#">Đăng xuất</a> 
+								<a class="dropdown-item" href="#">Đăng nhập</a> 
+								<a class="dropdown-item" href="#">Tạo tài khoản</a>
+							</div>
+						</li>
+				</ul>
+			</nav>
+			<nav class="navbar navbar-expand-sm navbar-dark" style="background-color:#232f3e; height:38px; flex-wrap:nowrap;">
+			    <!--background-color: Links -->
+			    <ul class="navbar-nav">
+			        <li class="nav-item">
+			            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">
+			                <span class="navbar-toggler-icon"></span></a>
+			        </li>
+			    </ul>
+			    <span class="navbar-brand d-flex d-md-none mx-auto" th:insert="${header}" >
+					Header </span>
+			</nav>
+		</header>
+		<div>
+			<!-- CONTENT -->
+			<div class="row">
+				<div class="col-12 col-md-1 d-none d-md-block" style="padding-right: 0px;">
+				</div>
+				<div class="col-12 col-md-10" style="margin-top:10px;">
+					<th:block th:insert="${center}"></th:block>
+				</div>
+
+			</div>
+			<div class="col-12 col-md-1" style="padding-right: 0px;">
+				<th:block></th:block>
+			</div>
+		</div>
+		<!-- end row -->
+		<!-- end content -->
+	</div>
+	<div class="modal left fade" id="myModal"><!-- left menu -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="height: 50px;">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Hello</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item ml-auto">
+                            <a class="nav-link close" href="#" data-dismiss="modal">&times;</a>
+                        </li>
+                    </ul>
+                </nav>
+                <th:block th:insert="layout/LeftMenu::leftMenu"></th:block>
+            </div>
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+</body>
+
+</html>

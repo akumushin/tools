@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html  lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<th:block th:fragment="form(form, isSearch)">
+	<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group mb-2">
+							<label>Chồng:</label>
+							<div class="input-group input-group-sm">
+								<input type="hidden" name="husbandId" id="husbandId" th:value="${form.husbandId}">
+								<span class="form-control" id="husbandDisplay">[[${form.husbandName}]]</span>
+								<div class="input-group-append">
+									<button class="btn btn-warning search" data-display="#husbandDisplay"
+										data-output="#husbandId"
+										th:data-link="${#mvc.url('Persons#search').build()}">Tìm kiếm</button>
+								</div>
+								<div class="input-group-append">
+									<button class="btn btn-danger delete" data-display="#husbandDisplay"
+										data-output="#husbandId">Xóa</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group mb-2">
+							<label>Lần kết hôn thứ:</label>
+							<input type="number" class="form-control form-control-sm" placeholder="Input number" name="husbandFlag" th:value="${form.husbandFlag}">
+						</div>
+						
+					</div><!-- end col -->
+					<div class="col-sm-6">
+						<div class="form-group mb-2">
+							<label>Vợ:</label>
+							<div class="input-group input-group-sm">
+								<input type="hidden" name="wifeId" id="wifeId" th:value="${form.wifeId}">
+								<span class="form-control" id="wifeDisplay">[[${form.wifeName}]]</span>
+								<div class="input-group-append">
+									<button class="btn btn-warning search" data-display="#wifeDisplay"
+										data-output="#wifeId" th:data-link="${#mvc.url('Persons#search').build()}">Tìm
+										kiếm</button>
+								</div>
+								<div class="input-group-append">
+									<button class="btn btn-danger delete" data-display="#wifeDisplay"
+										data-output="#wifeId">Xóa</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group mb-2">
+							<label>Lần kết hôn thứ:</label>
+							<input type="number" class="form-control form-control-sm" placeholder="Input number" name="wifeFlag" th:value="${form.wifeFlag}">
+						</div>
+					</div>
+				</div>
+				<!--  -->
+				<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group mb-2">
+				<label>Tình trạng*:</label>
+				<select class="form-control form-control-sm" name="divorced">
+ 					<option value="" th:selected="${form.divorced?.toString()}==''" th:if="${isSearch}">Tất cả</option> 
+					<option value="false" th:selected="${form.divorced?.toString()}=='false'">Kết hôn</option>
+					<option value="true" th:selected="${form.divorced?.toString()}=='true'">Ly hôn</option>
+				</select>
+			</div>
+				</div>
+			</div>
+			<div class ="row">
+				<div class="col-sm-6">
+				<div class="form-group mb-2">
+				<label>Ngày kết hôn*:</label>
+				<input type="number" class="form-control form-control-sm" placeholder="yyyymmdd" name="marryDate" th:value="${form.marryDate}">
+			</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group mb-2">
+				<label>Ngày ly hôn*:</label>
+				<input type="number" class="form-control form-control-sm" placeholder="yyyymmdd" name="birthday" th:value="${form.divorceDate}">
+			</div></div>
+			</div>
+			
+			
+			
+		
+</th:block>	
+</body>
+</html>

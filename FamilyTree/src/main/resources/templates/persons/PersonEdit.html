@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	th:replace="layout/Base::layout(
+    	~{::head/content()},
+    	~{::#pageName/content()}, 
+    	~{::#center/content()}, 
+    )">
+<head>
+<title>Thay đổi thông tin</title>
+<script th:src="@{/js/persons/person-add.js}"></script>
+</head>
+<body>
+	<span id="pageName">Thay đổi thông tin</span>
+	<div id="center">
+	<div class="container">
+		<!-- center layout ${#mvc.url('Persons#edit').arg(0,obj.id).build()}-->
+		<form th:action="${CONVERT.url('Persons#edit',obj.id)}" method="post" >
+			<th:block th:insert="layout/PersonForm::form(${obj}, false)"></th:block>
+			<div class="col-12 text-center">
+				<a class="btn btn-danger" style="width:100px;">Hủy</a>
+				<button type="submit" class="btn btn-success" style="width:100px;">Thay đổi</button>
+			</div>
+		</form>
+	</div>
+	</div>
+</body>
+</html>
