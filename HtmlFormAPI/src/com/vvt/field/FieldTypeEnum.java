@@ -15,6 +15,7 @@ public enum FieldTypeEnum {
 	checkbox,
 	radio,
 	select,
-	none
+	none,
+	hidden
 	
 }

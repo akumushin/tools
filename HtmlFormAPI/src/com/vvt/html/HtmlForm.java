@@ -73,6 +73,7 @@ public class HtmlForm {
 					break;
 				}
 				if(htmlField!=null) {
+					//errors(field.getName()).forEach(System.out::println);
 					htmlField.setErrorListTag(new ErrorListTag(errors(field.getName())));
 					htmlField.asDefault();
 					htmlFields.add(htmlField);

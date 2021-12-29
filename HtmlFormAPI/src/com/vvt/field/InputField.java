@@ -34,4 +34,6 @@ public @interface InputField {
 	 */
 	Choise[] choises() default {}; 
 	
+	String [] groups() default {"default"};
+	
 }
